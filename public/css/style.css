@@ -1,0 +1,39 @@
+body {
+    background-color: papayawhip;
+}
+
+h1 {
+    color: hotpink;
+}
+
+p {
+    color: mediumaquamarine;
+    font-size: 1.5rem;
+}
+
+img {
+    width: 3rem;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+}
+
+/* nav {
+    display: flex;
+    justify-content: center;
+} */
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+nav ul li {
+    text-decoration: none;
+    list-style: none;
+}
