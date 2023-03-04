@@ -20,9 +20,6 @@ app.get('/login', (req, res) => {
   res.render('login', {check: 'Hoi DiT WErkt Nu wEl'})
 });
 
-// app.get('/*', (req, res) => {
-//   res.status(404).send('Sorry, the page you are looking for was not found.');
-// });
 
 app.listen(port, () => {
   console.log(`My new first server hosted on port ${port}!`)
@@ -56,3 +53,7 @@ app.get('/users/:userName', (req, res) => {
   res.render('userdetails', {title: `User details for ${user.name}`, user})
 });
 
+
+app.get('/*', (req, res) => {
+  res.status(404).send('Sorry, the page you are looking for was not found.');
+});
