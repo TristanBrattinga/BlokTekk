@@ -14,8 +14,6 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const dbPassword = process.env.DB_PASSWORD;
-
 // Here I'll make an object to shove into the homepage view
 
 const users = [
@@ -66,7 +64,7 @@ app.get('/*', (req, res) => {
 
 async function connectDB(){
   const { MongoClient, ServerApiVersion } = require('mongodb');
-  const uri = "mongodb+srv://Tristan:" + dbPassword + "@clustertristoni.jpag5is.mongodb.net/?retryWrites=true&w=majority";
+  const uri = process.env.DB_CONNECTION_STRING;
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
   try {
     console.log('awaiting connection');

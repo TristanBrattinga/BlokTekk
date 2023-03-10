@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/TristanBrattinga/BlokTekk/issues"
   },
-  "homepage": "https://github.com/TristanBrattinga/BlokTekk#readme",
+  "homepage": "https://github.com/TristanBrattinga/bloktech",
   "dependencies": {
     "camelcase": "^7.0.1",
     "chalk": "^4.1.2",
