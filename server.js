@@ -2,6 +2,8 @@ const express = require('express');
 const chalk = require('chalk');
 const app = express();
 const port = 8080;
+require('dotenv').config();
+console.log(process.env);
 
 console.log(chalk.blue('Hello'),chalk.magenta('World!')); // DIT IS EEN CHECK VOOR CHALK
 
@@ -11,6 +13,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+const dbPassword = process.env.DB_PASSWORD;
 
 // Here I'll make an object to shove into the homepage view
 
@@ -61,26 +65,26 @@ app.get('/*', (req, res) => {
 });
 
 async function connectDB(){
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://Tristan:8pntmHWnsAqtyDwr@clustertristoni.jpag5is.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-try {
-  console.log('awaiting connection');
-  await client.connect();
-  console.log('connected');
-  db = client.db('Testdb');
-}
-catch(error){
-  console.error(error);
-  throw error;
-}
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = "mongodb+srv://Tristan:" + dbPassword + "@clustertristoni.jpag5is.mongodb.net/?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+  try {
+    console.log('awaiting connection');
+    await client.connect();
+    console.log('connected');
+    db = client.db('Testdb');
+  }
+  catch(error){
+    console.error(error);
+    throw error;
+  }
 };
 
 
 app.listen(port, async () => {
   console.log(chalk.green(`My new first server hosted on port ${port}!`));
   let databaseConnection = await connectDB();
-  let theData = await db.collection('collection1').find({ name : 'Quinten'}).toArray();
+  let theData = await db.collection('collection1').find({}).toArray();
   console.log(theData);
 });
 
