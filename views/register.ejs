@@ -8,7 +8,40 @@
       <%- include('./partials/header.ejs') %>
     </header>
     <main>
-      <h1><%= welcomemessage %></h1>
+      <h1><%= title %></h1>
+
+      <form action="/users" method="post">
+        <div>
+          <label for="firstname">First Name</label><br>
+          <input type="text" name="name" id="firstname" required>
+        </div>
+        <br>
+        <div>
+          <label for="age">Age</label><br>
+          <input type="text" name="age" id="age" required>
+        </div>
+        <br>
+        <div>
+          <label for="gender">Gender</label><br>
+          <input type="text" name="gender" id="gender" required>
+        </div>
+        <br>
+        <div>
+          <fieldset>
+            <legend>Genres</legend>
+            <% genres.forEach((genre) => { %>
+            <input type="checkbox" name="genres" value="<%= genre %>" id="<%= genre %>">
+            <label for="<%= genre %>"><%= genre %></label><br>
+            <% }) %>
+          </fieldset>
+        </div>
+        <br>
+        <button>Sign up</button>
+
+      </form>
+    
+
+
 
       <a href="/">Go Back!</a>
     </main>  
