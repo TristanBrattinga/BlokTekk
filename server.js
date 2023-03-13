@@ -75,11 +75,3 @@ app.post('/userdetails', async (req, res) => {
   })
   res.send(userdata);
 });
-
-
-
-
-app.delete('/deleted'), async (req, res) => {
-  const userIdToDelete = {_id: req.body.id};
-  db.collection1.deleteOne()
-}

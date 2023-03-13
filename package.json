@@ -1,5 +1,5 @@
 {
-  "name": "bloktekk",
+  "name": "bloktech",
   "version": "1.0.0",
   "description": "This is my package for block tech 2023",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TristanBrattinga/BlokTekk.git"
+    "url": "git+https://github.com/TristanBrattinga/bloktech.git"
   },
   "keywords": [],
   "author": "Tristan Brattinga",
