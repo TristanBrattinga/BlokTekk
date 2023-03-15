@@ -38,14 +38,13 @@ app.get("/register", (req, res) => {
   res.render("register", { title: "Sign up here", date });
 });
 
+app.get("/account/userId", (req, res) => {
+  res.render("account");
+});
+
 // LOGIN PAGE
 app.get("/login", (req, res) => {
   res.render("login");
-});
-
-// ACCOUNT PAGE
-app.get("/account/:userId/:slug", (req, res) => {
-  res.render("account");
 });
 
 // CONTACT PAGE
@@ -63,7 +62,7 @@ async function connectDB () {
     console.log("awaiting connection");
     await client.connect();
     console.log("connected");
-    let db = client.db("blockTechDB");
+    db = client.db("blockTechDB");
   } catch (error) {
     console.error(error);
     throw error;
@@ -94,16 +93,24 @@ app.post("/account", async (req, res) => {
   }
 });
 
+app.post("account/delete", async (req, res) => {
+  connectDB();
+
+  
+
+  const userName = req.body.name;
+  // const user = db.collection("collection1").find({ userName });
+  console.log(userName);
+});
+
 app.listen(port, async () => {
   console.log(chalk.green(`My new first server hosted on port ${port}!`));
-  const databaseConnection = await connectDB();
-  const theData = await db.collection("collection1").find({}).toArray();
-  // await db.collection('collection1').deleteMany({});     TO DELETE DB DATA
+  let databaseConnection = await connectDB();
+  let theData = await db.collection("collection1").find({}).toArray();
+  // await db.collection("collection1").deleteMany({});
 });
 
 // 404 PAGE
 app.use((req, res) => {
   res.status(404).render("404");
 });
-
-// REMOVE ACCOUNT

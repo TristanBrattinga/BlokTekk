@@ -10,11 +10,16 @@
     <section>
         <h1>Hello <%= user.name %></h1>
 
+        <h2><%= user.email %></h2>
+
         <h2><%= user.dateofbirth %></h2>
 
         <h2><%= user.gender %></h2>
 
-        <button>Delete account</button>
+        <form id="deleteform" method="post" action="/account/delete">
+            <input type="hidden" name="_id" value="<%= user._id %>">
+            <button type="submit">Delete Account</button>
+          </form>
     </section>
    </main>    
 </body>
