@@ -1,16 +1,29 @@
 <%- include('./partials/head.ejs') %>
 
-<title>Login</title>
+<title>Register</title>
 </head>
 
 <body>
     <header>
-        <%- include('./partials/header.ejs') %>
+      <%- include('./partials/header.ejs') %>
     </header>
     <main>
-        <h1><%= check %></h1>
+      <section>
 
-        <h1>This will be the login page</h1>
-    </main>
-</body>
-</html>
+        <form action="/login" method="POST">
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email" required>
+          
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+          
+            <button type="submit">Log In</button>
+          </form>
+                    
+      </section>
+
+      <script src="/public/js/script.js"></script>
+    </main>  
+  </body>
+  </html>
+

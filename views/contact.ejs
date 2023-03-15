@@ -1,14 +1,36 @@
 <%- include('./partials/head.ejs') %>
 
-<title>Login</title>
+<title>Contact</title>
 </head>
 
 <body>
     <header>
         <%- include('./partials/header.ejs') %>
     </header>
+    
     <main>
-        <h1>This will be the login page</h1>
+      <section>
+        <form action="/submit" method="post">
+          <div>
+            <label for="firstname">First Name</label><br>
+            <input type="text" name="name" id="firstname" required>
+          </div>
+          <div>
+            <label for="age">Age</label><br>
+            <input type="text" name="age" id="age" required>
+          </div>
+          <div>
+            <label for="gender">Gender</label><br>
+            <input type="text" name="gender" id="gender" required>
+          </div>
+          <div>
+            <label for="submit"></label>
+            <input type="submit" name="submit" id="submit">
+          </div>
+        </form>
+      </section>
     </main>
+
+  <script src="/public/js/script.js"></script>
 </body>
 </html>
