@@ -1,17 +1,6 @@
-<%- include('./partials/head.ejs') %>
-
-<title>Register</title>
-</head>
-
-<body>
-    <header>
-      <%- include('./partials/header.ejs') %>
-    </header>
-    <main>
+<main>
       <section>
-        <h1><%= title %></h1>
-
-        <form action="/account" method="post">
+          <form action="/account" method="post">
 
           <label for="name">Name:</label>
           <input type="text" id="name" placeholder="First name" name="name" required>
@@ -20,7 +9,7 @@
           <input type="text" id="lastname" placeholder="Last name" name="lastname" required>
 
           <label for="dateofbirth">Date of birth:</label>
-          <input type="date" id="dateofbirth" name="dateofbirth" min="1920-01-01" max="<%= date %>" required>
+          <input type="date" id="dateofbirth" name="dateofbirth" required>
 
           <label for="gender">Gender:</label>
           <select name="gender" id="gender" required>
@@ -45,7 +34,4 @@
       </section>
 
       <script src="/public/js/script.js"></script>
-    </main>  
-  </body>
-  </html>
-
+</main>  
