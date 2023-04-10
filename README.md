@@ -1,16 +1,36 @@
-# Matching app name here
+# Mix & Match
 
 Put Image here
 
+## The concept
+
+## The feature
+
+## Pre-installation
+Install Git
+
+Install Node.js
+
+
 ## Installation 
+Clone this repository to your own device
 ```
-Put code here
+git clone https://github.com/TristanBrattinga/bloktech.git
+```
+When you have installed all the prerequisites, navigate to the project directory:
+```
+cd <path>/<path>/bloktech
+```
+Now install the required dependencies by running the following command:
+```
+npm install
 ```
 
 ## Run
 ```
-Put code here
+npm start
 ```
+localhost:8080 in the browser
 
 ## Wiki
 In the [Wiki](https://github.com/TristanBrattinga/bloktech/wiki) you can find all the information about this project and the matching application I built.
