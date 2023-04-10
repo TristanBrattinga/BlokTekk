@@ -4,6 +4,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
+const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -12,6 +13,11 @@ require('dotenv').config();
 /**========================================================================
  *                       Requiring seperate routes
  *========================================================================**/
+
+const indexRouter = require('./routes/indexRouter');
+const registerRouter = require('./routes/registerRouter');
+const loginRouter = require('./routes/loginRouter');
+const profileRouter = require('./routes/profileRouter');
 
 /**========================================================================
  *                      Requiring mongoose models
@@ -42,12 +48,15 @@ main().catch((err) => console.log(err));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(expressLayouts);
 
 /**========================================================================
  *                           Templating
  *========================================================================**/
 
 app.set('view engine', 'ejs');
+app.set('views', 'views');
+app.set('layout', 'layouts/main');
 
 /**========================================================================
  *                           Sessions
@@ -73,32 +82,20 @@ app.use(session({
 /**----------------------
  *    Home Page
  *------------------------**/
-app.use('/', (req, res) => {
-  res.render('pages/index');
-});
+app.use('/', indexRouter);
+
+/**----------------------
+ *    Register Page
+ *------------------------**/
+app.use('/register', registerRouter);
+
+/**----------------------
+ *    Login Page
+ *------------------------**/
+app.use('/login', loginRouter);
 
 // /**----------------------
-//  *    Home Page
-//  *------------------------**/
-// app.use('/profile', profileRouter);
-
-// /**----------------------
-//  *    Home Page
-//  *------------------------**/
-// app.use('/profile', profileRouter);
-
-// /**----------------------
-//  *    Home Page
-//  *------------------------**/
-// app.use('/profile', profileRouter);
-
-// /**----------------------
-//  *    Home Page
-//  *------------------------**/
-// app.use('/profile', profileRouter);
-
-// /**----------------------
-//  *    Home Page
+//  *    Profile Page
 //  *------------------------**/
 // app.use('/profile', profileRouter);
 
@@ -107,11 +104,7 @@ app.use('/', (req, res) => {
  *========================================================================**/
 
 app.use((req, res) => {
-  res
-    .status(404)
-    .send(
-      'We`re sorry, we were not able to find the page you were looking for'
-    );
+  res.status(404).send('We`re sorry, we were not able to find the page you were looking for');
 });
 
 /**========================================================================
