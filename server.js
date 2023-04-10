@@ -1,116 +1,123 @@
-const express = require("express");
-const chalk = require("chalk");
-// const bcrypt = require("bcrypt");
-const slug = require("slug");
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+
+const express = require('express');
 const app = express();
-const port = 8080;
-require("dotenv").config();
+const port = process.env.PORT || 8080;
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+require('dotenv').config();
 
-console.log(chalk.blue("Hello"), chalk.magenta("World!")); // DIT IS EEN CHECK VOOR CHALK
+/**========================================================================
+ *                       Requiring seperate routes
+ *========================================================================**/
 
-app
-  .use("/public", express.static("public"))
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .set("view engine", "ejs")
-  .set("views", "views");
+/**========================================================================
+ *                      Requiring mongoose models
+ *========================================================================**/
 
-const date = new Date().toLocaleDateString();
+const { User } = require('./models/userModel');
 
-// const genres = ["Drum & Bass", "Pop", "Rap", "Tech-House", "Old School Hip Hop"];
+/**========================================================================
+ *                  Defining and connection to database
+ *========================================================================**/
 
-// app.get("/users", (req, res) => {
-//   res.render("userlist", { title: "All users", users });
-// });
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}${process.env.DB_URI}`;
 
-// app.get("/users/:userName", (req, res) => {
-//   const user = users.find(user => user.name == req.params.userName);
-//   res.render("account");
-// });
+async function main () {
+  await mongoose.connect(uri, {
+    dbName: process.env.DB_NAME,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+  console.log('Succesfully connected');
+}
+main().catch((err) => console.log(err));
 
-// HOMEPAGE
-app.get("/", (req, res) => {
-  res.render("index");
+/**========================================================================
+ *                           Middleware
+ *========================================================================**/
+
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+/**========================================================================
+ *                           Templating
+ *========================================================================**/
+
+app.set('view engine', 'ejs');
+
+/**========================================================================
+ *                           Sessions
+ *========================================================================**/
+
+const sessionSecret = process.env.SESSION_SECRET;
+const store = new MongoDBStore({
+  uri,
+  collection: process.env.DB_COLLECTION_SESSIONS
 });
 
-// REGISTER PAGE
-app.get("/register", (req, res) => {
-  res.render("register", { title: "Sign up here", date });
+app.use(session({
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  store
+}));
+
+/**========================================================================
+ *                           Routing
+ *========================================================================**/
+
+/**----------------------
+ *    Home Page
+ *------------------------**/
+app.use('/', (req, res) => {
+  res.render('pages/index');
 });
 
-app.get("/account/userId", (req, res) => {
-  res.render("account");
-});
+// /**----------------------
+//  *    Home Page
+//  *------------------------**/
+// app.use('/profile', profileRouter);
 
-// LOGIN PAGE
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+// /**----------------------
+//  *    Home Page
+//  *------------------------**/
+// app.use('/profile', profileRouter);
 
-// CONTACT PAGE
-app.get("/contact", (req, res) => {
-  res.render("contact");
-});
+// /**----------------------
+//  *    Home Page
+//  *------------------------**/
+// app.use('/profile', profileRouter);
 
-// MONGODB CONNECTION
+// /**----------------------
+//  *    Home Page
+//  *------------------------**/
+// app.use('/profile', profileRouter);
 
-async function connectDB () {
-  const { MongoClient, ServerApiVersion } = require("mongodb");
-  const uri = process.env.DB_CONNECTION_STRING;
-  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-  try {
-    console.log("awaiting connection");
-    await client.connect();
-    console.log("connected");
-    db = client.db("blockTechDB");
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+// /**----------------------
+//  *    Home Page
+//  *------------------------**/
+// app.use('/profile', profileRouter);
 
-app.post("/account", async (req, res) => {
-  connectDB();
+/**========================================================================
+ *                           404 Error Handler
+ *========================================================================**/
 
-  const user = {
-    slug: slug(req.body.name + req.body.lastname, { lower: false }),
-    name: req.body.name,
-    lastname: req.body.lastname,
-    dateofbirth: req.body.dateofbirth,
-    gender: req.body.gender,
-    email: req.body.email,
-    password: req.body.password,
-    passwordcheck: req.body.passwordcheck
-  };
-  if (req.body.password !== req.body.passwordcheck) {
-    res.send("Passwords do not match");
-  } else {
-    db.collection("collection1").insertOne(user, function (err, collection) {
-      if (err) throw err;
-      console.log("succes");
-    });
-    res.render("account", { user });
-  }
-});
-
-app.post("account/delete", async (req, res) => {
-  connectDB();
-
-  
-
-  const userName = req.body.name;
-  // const user = db.collection("collection1").find({ userName });
-  console.log(userName);
-});
-
-app.listen(port, async () => {
-  console.log(chalk.green(`My new first server hosted on port ${port}!`));
-  let databaseConnection = await connectDB();
-  let theData = await db.collection("collection1").find({}).toArray();
-  // await db.collection("collection1").deleteMany({});
-});
-
-// 404 PAGE
 app.use((req, res) => {
-  res.status(404).render("404");
+  res
+    .status(404)
+    .send(
+      'We`re sorry, we were not able to find the page you were looking for'
+    );
+});
+
+/**========================================================================
+ *                           Start Webserver
+ *========================================================================**/
+
+app.listen(port, () => {
+  console.log(`Server is listening to port: ${port}`);
 });
