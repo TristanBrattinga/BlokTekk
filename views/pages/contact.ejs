@@ -1,0 +1,32 @@
+<%- include('./partials/head.ejs') %>
+
+<title>Contact</title>
+</head>
+
+<body>
+    <header>
+        <%- include('./partials/header.ejs') %>
+    </header>
+    
+    <main>
+      <section>
+
+        <h1>Contact</h1>
+
+        <form action="/submit" method="post">
+
+            <label for="fullname">Full Name:</label>
+            <input type="text" name="fullname" id="fullname" placeholder="Full name" required>
+
+
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email" placeholder="Example@gmail.com" required>
+
+            <input type="submit" value="Send">
+        </form>
+      </section>
+    </main>
+
+  <script src="/public/js/script.js"></script>
+</body>
+</html>

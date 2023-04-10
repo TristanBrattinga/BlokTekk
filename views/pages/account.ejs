@@ -1,0 +1,26 @@
+<%- include('partials/head') %>
+
+    <title>Homepage</title>
+</head>
+<body>
+    <header>
+        <%- include('partials/header') %>
+    </header>
+   <main>
+    <section>
+        <h1>Hello <%= user.name %></h1>
+
+        <h2><%= user.email %></h2>
+
+        <h2><%= user.dateofbirth %></h2>
+
+        <h2><%= user.gender %></h2>
+
+        <form id="deleteform" method="post" action="/account/delete">
+            <input type="hidden" name="_id" value="<%= user._id %>">
+            <button type="submit">Delete Account</button>
+          </form>
+    </section>
+   </main>    
+</body>
+</html>

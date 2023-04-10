@@ -1,0 +1,51 @@
+<%- include('./partials/head.ejs') %>
+
+<title>Register</title>
+</head>
+
+<body>
+    <header>
+      <%- include('./partials/header.ejs') %>
+    </header>
+    <main>
+      <section>
+        <h1><%= title %></h1>
+
+        <form action="/account" method="post">
+
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="First name" name="name" required>
+
+          <label for="lastname">Last name:</label>
+          <input type="text" id="lastname" placeholder="Last name" name="lastname" required>
+
+          <label for="dateofbirth">Date of birth:</label>
+          <input type="date" id="dateofbirth" name="dateofbirth" min="1920-01-01" max="<%= date %>" required>
+
+          <label for="gender">Gender:</label>
+          <select name="gender" id="gender" required>
+            <option value=""></option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" placeholder="example@gmail.com"required>
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Password"required>
+
+          <label for="passwordcheck">Password check:</label>
+          <input type="password" id="passwordcheck" name="passwordcheck" placeholder="Re-enter password"required>
+
+          <input type="submit" value="Sign Up">
+        </form>
+    
+      </section>
+
+      <script src="/public/js/script.js"></script>
+    </main>  
+  </body>
+  </html>
+
