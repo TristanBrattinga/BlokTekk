@@ -29,6 +29,9 @@
         ],
         "spaced-comment": [
             0
+        ],
+        "no-unused-vars": [
+            0
         ]
     }
 }
