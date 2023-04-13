@@ -1,14 +1,14 @@
 # Mix & Match
 
-<img src="https://user-images.githubusercontent.com/96078643/231850286-572e7d24-beb2-4344-bf76-9eb99d9e85bf.jpg" width="750px">
+<img src="https://user-images.githubusercontent.com/96078643/231850286-572e7d24-beb2-4344-bf76-9eb99d9e85bf.jpg" width="850px">
 
-## The concept 
+## The concept 💭
 I really wanted to chose a topic that spoke to me and that I found interesting. I wanted to make my matching app about music, so I decided to build it around finding concerts and festivals that suits your liking. On the [Concept](https://github.com/TristanBrattinga/bloktech/wiki/Concept) page you will find more information on how I established my concept.
 
-## The feature
+## The feature ⚙️
 The feature I chose to build for my matching application is registration. I chose this feature, because I was really interested in how this can be created. I also thought this would give me a little bit of a challenge. When registrating for the matching application, it is possible to fill out the form in order to create your account. You can specify preferences, log in and delete your account.
 
-## Pre-installation
+## Pre-installation :wrench:
 ### Git (Windows)
 Download and install [Git for Windows](https://gitforwindows.org/).
 - Select your own preferred editor (in my case Visual Studio Code).
@@ -47,7 +47,7 @@ When you create your Cluster in Atlas you might need to Whitelist your IP.
 
 ***
 
-## Installation 
+## Installation :hammer:
 Clone this repository to your own device
 ```
 git clone https://github.com/TristanBrattinga/bloktech.git
@@ -80,7 +80,7 @@ DB_COLLECTION_2='<collection name>'
 
 >Also include your node_modules folder in your .gitignore file.
 
-## Run
+## Run :runner:
 To start the application I have made some `npm run scripts`. These make it easier to work with your application.
 
 To start the application in normal mode, run:
@@ -102,10 +102,10 @@ localhost:8080
 
 ### Thank you for reading this README file and checking out my application. I hope you enjoyed! 
 
-## Wiki
+## Wiki 📖
 In the [Wiki](https://github.com/TristanBrattinga/bloktech/wiki) you can find all the information about this project and the matching application I have built.
 
-## Sources
+## Sources :arrow_heading_down:
 - [NPM](https://www.npmjs.com/)
 - [freeCodeCamp](https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/)
 - [pt-course-22-23 repo](https://github.com/cmda-bt/pt-course-22-23)
@@ -121,7 +121,7 @@ In the [Wiki](https://github.com/TristanBrattinga/bloktech/wiki) you can find al
 - [Github emoji cheat sheet](https://gist.github.com/rxaviers/7360908)
 
 
-## License
+## License :mag:
 [MIT](https://github.com/TristanBrattinga/bloktech/blob/main/LICENSE.md)      
         
 *Disclaimer: All of the code and documentation found in this repository is written by myself or quoted.*
