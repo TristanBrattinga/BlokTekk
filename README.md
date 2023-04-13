@@ -120,6 +120,8 @@ In the [Wiki](https://github.com/TristanBrattinga/bloktech/wiki) you can find al
 - [Github markdown cheat sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 - [Github emoji cheat sheet](https://gist.github.com/rxaviers/7360908)
 
+>You can find all the cited sources in my [Wiki Resources Page](https://github.com/TristanBrattinga/bloktech/wiki/Resources).
+
 
 ## License :mag:
 [MIT](https://github.com/TristanBrattinga/bloktech/blob/main/LICENSE.md)      
