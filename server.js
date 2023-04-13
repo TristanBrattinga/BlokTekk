@@ -1,29 +1,30 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-require('dotenv').config();
+const compression = require('compression');
+const passport = require('passport');
 
 /**========================================================================
  *                       Requiring seperate routes
  *========================================================================**/
 
-const indexRouter = require('./routes/indexRouter');
-const registerRouter = require('./routes/registerRouter');
-const loginRouter = require('./routes/loginRouter');
-const profileRouter = require('./routes/profileRouter');
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/users');
 
 /**========================================================================
  *                      Requiring mongoose models
  *========================================================================**/
 
-const { User } = require('./models/userModel');
+const User = require('./models/userModel');
 
 /**========================================================================
  *                  Defining and connection to database
@@ -49,6 +50,8 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(expressLayouts);
+app.use(methodOverride('_method'));
+app.use(compression());
 
 /**========================================================================
  *                           Templating
@@ -75,6 +78,9 @@ app.use(session({
   store
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 /**========================================================================
  *                           Routing
  *========================================================================**/
@@ -87,17 +93,7 @@ app.use('/', indexRouter);
 /**----------------------
  *    Register Page
  *------------------------**/
-app.use('/register', registerRouter);
-
-/**----------------------
- *    Login Page
- *------------------------**/
-app.use('/login', loginRouter);
-
-// /**----------------------
-//  *    Profile Page
-//  *------------------------**/
-// app.use('/profile', profileRouter);
+app.use('/users', userRouter);
 
 /**========================================================================
  *                           404 Error Handler
