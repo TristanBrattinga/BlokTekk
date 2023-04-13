@@ -56,6 +56,7 @@ input[type = submit] {
     padding: .75rem 6rem;
     margin: 2rem auto 1rem;
     transition: .5s;
+    border: none;
 }
     
 input[type = submit]:hover {
@@ -222,7 +223,7 @@ form {
     margin: 0 auto;
 }
 
-#signup {
+#register {
     font-size: 1.25rem;
     color: var(--basic-color);
     background-color: var(--background-color);
@@ -232,7 +233,7 @@ form {
     transition: .5s;
 }
 
-#signup:hover {
+#register:hover {
     transform: translatey(-.2em);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -244,4 +245,31 @@ form {
     margin: 0 auto;
     color: var(--basic-color);
     background: var(--background-color);
+}
+
+#logout {
+    font-size: 1.25rem;
+    color: var(--basic-color);
+    background-color: var(--background-color);
+    border-radius: 2rem;
+    padding: .75rem 6rem;
+    margin: 2rem auto 1rem;
+    transition: .5s;
+    border: none;
+}
+
+#logout:hover {
+    transform: translatey(-.2em);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#remove {
+    font-size: 1rem;
+    color: var(--basic-color);
+    background-color: var(--link-color);
+    border-radius: 2rem;
+    padding: .75rem 2rem;
+    margin: 2rem auto 1rem;
+    transition: .5s;
+    border: none;
 }
