@@ -15,48 +15,48 @@ document.querySelectorAll('[data-no-arrow-control="true"]').forEach(input => {
     })
 })
 
-const getLocationBtn = document.querySelector('#getLocation')
-const container = document.querySelector('#container')
+document.addEventListener('DOMContentLoaded', () => {
+    const getLocationBtn = document.querySelector('#getLocation')
+    const container = document.querySelector('#container')
+    const loadingDiv = document.querySelector('#loading')
 
-const loadingDiv = document.querySelector('#loading')
+    getLocationBtn.addEventListener('click', () => {
+        container.innerHTML = ''
+        loadingDiv.style.display = 'block'
 
-getLocationBtn.addEventListener('click', () => {
-    container.innerHTML = ''
-    loadingDiv.style.display = 'block'
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(sendPosition)
+        } else {
+            alert('Geolocation is not supported by this browser.')
+        }
+    })
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(sendPosition)
-    } else {
-        alert('Geolocation is not supported by this browser.')
+    const sendPosition = (position) => {
+        fetch('/location', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            })
+        })
+            .then(response => response.json())
+            .then(data => createElements(data))
+            .catch(error => console.error('Error:', error))
+    }
+
+    const createElements = (data) => {
+        loadingDiv.style.display = 'none'
+        data.cityData.forEach(city => {
+            const h2 = document.createElement('h2')
+            const h3 = document.createElement('h3')
+            const h4 = document.createElement('h4')
+            h2.textContent = city.name
+            h3.textContent = city.country
+            h4.textContent = city.state
+            container.append(h2, h3, h4)
+        })
     }
 })
-
-const sendPosition = (position) => {
-    fetch('/location', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        })
-    })
-        .then(response => response.json())
-        .then(data => createElements(data))
-        .catch(error => console.error('Error:', error))
-}
-
-const createElements = (data) => {
-    loadingDiv.style.display = 'none'
-
-    data.cityData.forEach(city => {
-        const h2 = document.createElement('h2')
-        const h3 = document.createElement('h3')
-        const h4 = document.createElement('h4')
-        h2.textContent = city.name
-        h3.textContent = city.country
-        h4.textContent = city.state
-        container.append(h2, h3, h4)
-    })
-}

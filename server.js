@@ -4,7 +4,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 const expressLayouts = require('express-ejs-layouts')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
@@ -100,11 +100,11 @@ app.use('/users', userRouter)
  *------------------------**/
 
 app.get('/location', (req, res) => {
-    res.render('location')
+    res.render('location', { cityData: null })
 })
 
 app.post('/location', async (req, res) => {
-    const { latitude, longitude } = req.body
+    const { latitude, longitude, jsEnabled } = req.body
     const url = `https://api.api-ninjas.com/v1/reversegeocoding?lat=${latitude}&lon=${longitude}`
 
     try {
@@ -117,10 +117,13 @@ app.post('/location', async (req, res) => {
 
         const cityData = await response.json()
 
-        res.json({
+        res.status(200).json({
             status: 'success',
-            cityData,
+            cityData
         })
+        // res.render('location', {
+        //     cityData: cityData[0]
+        // })
     } catch (error) {
         res.status(500).json({
             status: 'error',

@@ -1,19 +1,26 @@
 <section>
     <noscript>
         <form action="/location" method="post">
+            <input type="checkbox" name="jsEnabled" id="jsEnabled" hidden>
             <label>
                 Latitude:
-                <input type="number" data-no-arrow-control="true" placeholder="±DD.DDDD" required/>
+                <input type="number" name="latitude" data-no-arrow-control="true" placeholder="±DD.DDDD" step=".0001" required/>
             </label>
             <label>
                 Longitude:
-                <input type="number" data-no-arrow-control="true" placeholder="±DD.DDDD" required/>
+                <input type="number" name="longitude" data-no-arrow-control="true" placeholder="±DD.DDDD" step=".0001" required/>
             </label>
             <button type="submit">Submit</button>
         </form>
     </noscript>
     <button id="getLocation" class="primary-btn">Retrieve Location</button>
     <h1>Your location:</h1>
-    <div id="container"></div>
+    <div id="container">
+        <% if (cityData) { %>
+            <h2>City: <%= cityData.name %></h2>
+            <h3>Country: <%= cityData.country %></h3>
+            <h4>State: <%= cityData.state %></h4>
+        <% } %>
+    </div>
     <div id="loading"></div>
 </section>
