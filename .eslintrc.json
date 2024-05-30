@@ -16,7 +16,7 @@
             4
         ],
         "linebreak-style": [
-            "error",
+            "off",
             "windows"
         ],
         "quotes": [
@@ -27,6 +27,7 @@
             "error",
             "never"
         ],
+        "comma-dangle": "off",
         "spaced-comment": [
             0
         ],

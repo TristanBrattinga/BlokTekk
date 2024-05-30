@@ -95,8 +95,39 @@ app.use('/', indexRouter)
  *------------------------**/
 app.use('/users', userRouter)
 
+/**----------------------
+ *    Location Page
+ *------------------------**/
+
 app.get('/location', (req, res) => {
-  res.render('location')
+    res.render('location')
+})
+
+app.post('/location', async (req, res) => {
+    const { latitude, longitude } = req.body
+    const url = `https://api.api-ninjas.com/v1/reversegeocoding?lat=${latitude}&lon=${longitude}`
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'X-Api-Key': process.env.NINJA_API_KEY,
+            },
+        })
+
+        const cityData = await response.json()
+
+        res.json({
+            status: 'success',
+            cityData,
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Failed to retrieve city data',
+            error: error.message,
+        })
+    }
 })
 
 /**========================================================================
@@ -104,13 +135,12 @@ app.get('/location', (req, res) => {
  *========================================================================**/
 
 app.use((req, res) => {
-  res.status(404).send('We`re sorry, we were not able to find the page you were looking for')
+    res.status(404).send('We`re sorry, we were not able to find the page you were looking for')
 })
-
 /**========================================================================
  *                           Start Webserver
  *========================================================================**/
 
 app.listen(port, () => {
-  console.log(`Server is listening to port: ${port}`)
+    console.log(`Server is listening to port: ${port}`)
 })
