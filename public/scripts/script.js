@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/location', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-requested-With': 'XMLHttpRequest',
             },
             body: JSON.stringify({
                 latitude: position.coords.latitude,

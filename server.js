@@ -104,7 +104,7 @@ app.get('/location', (req, res) => {
 })
 
 app.post('/location', async (req, res) => {
-    const { latitude, longitude, jsEnabled } = req.body
+    const { latitude, longitude } = req.body
     const url = `https://api.api-ninjas.com/v1/reversegeocoding?lat=${latitude}&lon=${longitude}`
 
     try {
@@ -117,13 +117,18 @@ app.post('/location', async (req, res) => {
 
         const cityData = await response.json()
 
-        res.status(200).json({
-            status: 'success',
-            cityData
-        })
-        // res.render('location', {
-        //     cityData: cityData[0]
-        // })
+        if (req.get('X-Requested-With') === 'XMLHttpRequest') {
+            // Client-side JavaScript expects JSON
+            res.status(200).json({
+                status: 'success',
+                cityData
+            })
+        } else if (req.accepts('text/html')) {
+            // Form submission expects HTML
+            res.render('location', {
+                cityData,
+            })
+        }
     } catch (error) {
         res.status(500).json({
             status: 'error',

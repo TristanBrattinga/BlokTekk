@@ -1,7 +1,6 @@
 <section>
     <noscript>
         <form action="/location" method="post">
-            <input type="checkbox" name="jsEnabled" id="jsEnabled" hidden>
             <label>
                 Latitude:
                 <input type="number" name="latitude" data-no-arrow-control="true" placeholder="±DD.DDDD" step=".0001" required/>
@@ -16,11 +15,17 @@
     <button id="getLocation" class="primary-btn">Retrieve Location</button>
     <h1>Your location:</h1>
     <div id="container">
-        <% if (cityData) { %>
-            <h2>City: <%= cityData.name %></h2>
-            <h3>Country: <%= cityData.country %></h3>
-            <h4>State: <%= cityData.state %></h4>
-        <% } %>
+        <noscript>
+            <% if (cityData) { %>
+                <% cityData.forEach(city => { %>
+                    <h2>City: <%= city.name %></h2>
+                    <h3>Country: <%= city.country %></h3>
+                    <h4>State: <%= city.state %></h4>
+                <% }) %>
+            <% } else { %>
+              <p>Geen stad kunnen vinden...</p>
+            <% } %>
+        </noscript>
     </div>
     <div id="loading"></div>
 </section>
